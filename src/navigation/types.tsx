@@ -5,7 +5,7 @@ export type AuthStackParamList = {
 
     Welcome: undefined
     SignIn: undefined
-    signUp: undefined
+    SignUp: undefined
 
 }
 

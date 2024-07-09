@@ -13,6 +13,15 @@ const AuthStackNavigator = () => {
                 name="Welcome"
                 component={WelcomeScreen}
             />
+            <Stack.Screen
+                name="SignIn"
+                component={WelcomeScreen}
+            />
+            <Stack.Screen
+                name="SignUp"
+                component={WelcomeScreen}
+            />
+
         </Stack.Navigator>
     )
 }
