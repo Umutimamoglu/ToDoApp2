@@ -2,7 +2,7 @@
 import React from 'react'
 import { Box, Text } from '../../utils/theme'
 
-const WeolcomeScreen = () => {
+const WelcomeScreen = () => {
     return (
         <Box>
             <Text> weolcome screeen</Text>
@@ -10,5 +10,5 @@ const WeolcomeScreen = () => {
     )
 }
 
-export default WeolcomeScreen
+export default WelcomeScreen
 
