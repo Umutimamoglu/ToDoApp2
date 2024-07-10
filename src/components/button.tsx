@@ -1,17 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Box, Text } from "../../utils/theme"
 import React from 'react'
-import { Box } from '../../utils/theme'
+import { Pressable } from "react-native"
 
-const button = () => {
+type ButtonProps = {
+    label: string
+    onPress: () => void
+    onLongPress?: () => void
+    disabled?: boolean
+    uppercase?: boolean
+}
+
+const Button = ({ label, onLongPress, onPress, disabled, uppercase }: ButtonProps) => {
     return (
-        <Box bg="blu200" p="4" borderRadius="rounded-3xl">
-            <Text>button kmnvfdkvdfmnkvmdfkvnfdnvf</Text>
-        </Box>
-
-
+        <Pressable onPress={onPress} onLongPress={onLongPress} disabled={disabled}>
+            <Box
+                bg={disabled ? "gray800" : "primary"}
+                py="3.5"
+                borderRadius="rounded-7xl"
+            >
+                <Text
+                    variant="textXs"
+                    fontWeight={"700"}
+                    color="white"
+                    textAlign="center"
+                    textTransform={uppercase ? "uppercase" : "none"}
+                >
+                    {label}
+                </Text>
+            </Box>
+        </Pressable>
     )
 }
 
-export default button
+export default Button
 
-const styles = StyleSheet.create({})
