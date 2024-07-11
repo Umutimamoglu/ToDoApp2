@@ -1,9 +1,9 @@
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import React from "react"
-import HomeScreen from "../../screens/home-screen"
+import HomeScreen from "../screens/home-screen"
 import { HomeStackParamlist } from "./types"
-import EditTaskcreen from "../../screens/edit-task"
+import EditTaskcreen from "../screens/edit-task"
 
 const Stack = createNativeStackNavigator<HomeStackParamlist>()
 

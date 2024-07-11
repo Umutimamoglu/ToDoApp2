@@ -1,11 +1,11 @@
 import { Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { AuthScreenNavigationType } from '../../src/navigation/types'
+import { AuthScreenNavigationType } from '../../navigation/types'
 import SafeAreaWraper from '../../src/shared/safe-area-wrapper'
 import { Box, Text } from '../../utils/theme'
-import Input from "../../src/components/input"
-import Button from '../../src/components/button'
+import Input from "../../src/shared/input"
+import Button from '../../src/shared/button'
 import { registerUser } from '../../service/api'
 import { useForm, Controller } from 'react-hook-form'
 import axios from 'axios'

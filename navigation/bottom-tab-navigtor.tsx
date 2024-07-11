@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RootBottomTabParamList } from "./types";
 import HomeStackNavigator from "./home-stack-navigator";
-import ComplatedScreen from "../../screens/complated-screen";
+import ComplatedScreen from "../screens/complated-screen";
 
-import TodayScreen from "../../screens/today-screen";
+import TodayScreen from "../screens/today-screen";
 import CategoriesStackNavigator from "./categories-stack-navigator";
 import { color, useTheme } from "@shopify/restyle";
-import Icons from "../shared/icons";
+import Icons from "../src/shared/icons";
 
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>()

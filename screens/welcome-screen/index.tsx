@@ -3,9 +3,9 @@ import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'react-native'; // react-native'den Image bileşenini kullanın
-import Button from '../../src/components/button';
+import Button from '../../src/shared/button';
 import { useNavigation } from '@react-navigation/native';
-import { AuthScreenNavigationType } from '../../src/navigation/types';
+import { AuthScreenNavigationType } from '../../navigation/types';
 
 const TODOAPP_IMAGE =
     "https://res.cloudinary.com/dooxt2sgsdooxt2sgs23233/image/upload/v1676809769/youtube/2023/february/blossom/icon_fb36u3.png"

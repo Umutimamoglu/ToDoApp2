@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppStackParamList } from "./types";
-import WelcomeScreen from "../../screens/welcome-screen";
+import WelcomeScreen from "../screens/welcome-screen";
 import BottomTabNavigator from "./bottom-tab-navigtor";
 
 
