@@ -1,6 +1,7 @@
 // @react-navigation/native ve @react-navigation/native-stack modüllerinden gerekli tipleri içe aktarıyoruz.
 import { CompositeNavigationProp, NavigatorScreenParams } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { ICategory } from "../types"
 
 // AuthStackParamList tipi, kimlik doğrulama (auth) akışı için kullanılacak ekranları tanımlar.
 // Welcome, SignIn ve SignUp ekranları herhangi bir parametre almaz.
@@ -37,7 +38,7 @@ export type CategoriesStackParamList = {
         id: string
     }
     CreateCategory: {
-        id?: string
+        category?: ICategory
     }
 }
 

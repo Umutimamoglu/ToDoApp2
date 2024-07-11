@@ -21,7 +21,7 @@ export interface IIcon {
     symbol: string
 }
 
-interface ICategory {
+export interface ICategory {
     _id: string
     name: string
     user: IUser | string
@@ -29,7 +29,6 @@ interface ICategory {
     color: IColor
     icon: IIcon
 }
-
 interface ICategoryRequest {
     name: string
     color: IColor
