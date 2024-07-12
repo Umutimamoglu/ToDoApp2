@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from '../../utils/theme';
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient'
 import { Image } from 'react-native'; // react-native'den Image bileşenini kullanın
 import Button from '../../src/shared/button';
 import { useNavigation } from '@react-navigation/native';

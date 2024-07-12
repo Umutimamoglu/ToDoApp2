@@ -10,8 +10,11 @@ import Button from '../../src/shared/button'
 import useSWR, { useSWRConfig } from 'swr'
 import useSWRMutation from 'swr/mutation'
 import axiosInstance, { BASE_URL } from '../../service/config'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { CategoriesStackParamList } from '../../navigation/types'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 
 const COLORS = getColors()
 const ICONS = getIcons()
@@ -33,7 +36,7 @@ const CreateCategoryRequest = async (
     }
 }
 
-const UpdateCategoryRequest = async (
+const updateCategoryRequest = async (
     url: string,
     { arg }: { arg: ICategoryRequest }
 ) => {
@@ -47,6 +50,19 @@ const UpdateCategoryRequest = async (
     }
 }
 
+const iconSize: 24 | 32 | 48 | 64 | 96 | 128 = 24;
+
+const deleteCategoryRequest = async (
+    url: string,
+    { arg }: { arg: { id: string } }
+) => {
+    try {
+        await axiosInstance.delete(url + "/" + arg.id)
+    } catch (error) {
+        console.log("error in deleteCategoryRequest", error)
+        throw error
+    }
+}
 type CreateCategoryRouteTypes = RouteProp<
     CategoriesStackParamList,
     "CreateCategory"
@@ -54,7 +70,10 @@ type CreateCategoryRouteTypes = RouteProp<
 
 function CreateCategoryScreen() {
     const theme = useTheme<Theme>()
+
     const route = useRoute<CreateCategoryRouteTypes>();
+    const navigation = useNavigation()
+    const isEditing = route.params.category ? true : false
 
     const { trigger, isMutating } = useSWRMutation(
         "categories/create",
@@ -63,8 +82,14 @@ function CreateCategoryScreen() {
 
     const { trigger: updateTrigger } = useSWRMutation(
         "categories/update",
-        UpdateCategoryRequest
+        updateCategoryRequest
     )
+
+    const { trigger: deleteTrigger } = useSWRMutation(
+        "categories/",
+        deleteCategoryRequest
+    )
+
 
     const { mutate } = useSWRConfig()
 
@@ -78,7 +103,7 @@ function CreateCategoryScreen() {
 
     const CreateNewCategory = async () => {
         try {
-            if (route.params.category) {
+            if (isEditing) {
                 const updateCategoryItem = {
                     ...route.params.category,
                     ...newCategory,
@@ -92,6 +117,7 @@ function CreateCategoryScreen() {
                 })
             }
             await mutate(BASE_URL + "categories")
+            navigation.goBack()
         } catch (error) {
             console.log("error in CreateNewCategroy", error)
             throw (error)
@@ -115,12 +141,34 @@ function CreateCategoryScreen() {
         })
     }
 
+    const deleteCategory = async () => {
+        try {
+            if (isEditing && route.params.category?._id)
+                await deleteTrigger({
+                    id: route.params.category?._id,
+                })
+            await mutate(BASE_URL + "categories")
+            navigation.goBack()
+
+        } catch (error) {
+            console.log("error in deleteCategroy", error)
+            throw error
+        }
+    }
+
+
     return (
         <SafeAreaWraper>
             <Box flex={1} mx='4'>
                 <Box height={16} />
                 <Box flexDirection='row' justifyContent='space-between' alignItems='center'>
                     <NavigateBack />
+                    {isEditing && (
+                        <Pressable onPress={deleteCategory}>
+                            <FontAwesomeIcon icon={faTrashCan} size={iconSize} color="brown" />
+                        </Pressable>
+                    )}
+
                 </Box>
                 <Box height={16} />
                 <Box bg="gray250" borderRadius="rounded-2xl">
@@ -216,7 +264,7 @@ function CreateCategoryScreen() {
                     </Box>
                 </Box>
                 <Box position="absolute" bottom={4} left={0} right={0}>
-                    <Button label='Create new Category' onPress={CreateNewCategory} />
+                    <Button label={isEditing ? "Edit Category" : "Create New Categroy"} onPress={CreateNewCategory} />
                 </Box>
             </Box>
         </SafeAreaWraper>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Text } from '../../utils/theme';
-import SafeAreaWraper from '../../src/shared/safe-area-wrapper';
 import useSWR from 'swr';
 import { fetcher } from '../../service/config';
 import Loader from '../../src/shared/loader';

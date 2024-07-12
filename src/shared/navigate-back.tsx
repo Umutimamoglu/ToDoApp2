@@ -3,8 +3,11 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Pressable } from 'react-native'
 import { Box } from '../../utils/theme'
-import { Ionicons } from '@expo/vector-icons';
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
+
+const iconSize: 24 | 32 | 48 | 64 | 96 | 128 = 24;
 
 const NavigateBack = () => {
 
@@ -16,7 +19,7 @@ const NavigateBack = () => {
     return (
         <Pressable onPress={navigateBack}>
             <Box bg="gray100" p="3" borderRadius="rounded-7xl">
-                <Ionicons name="chevron-back" size={24} color="black" />
+                <FontAwesomeIcon icon={faBackwardStep} size={iconSize} color="brown" />
             </Box>
         </Pressable>
     )

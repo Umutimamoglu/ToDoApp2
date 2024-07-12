@@ -2,6 +2,7 @@ import { createBox, createText, createTheme } from "@shopify/restyle"
 import { colors } from "./colors"
 import { textVariants } from "./textvariants"
 
+
 const theme = createTheme({
     colors: colors,
     spacing: {
@@ -35,6 +36,9 @@ export type Theme = typeof theme
 
 export const Box = createBox<Theme>()
 export const Text = createText<Theme>()
+
+
+
 
 
 export default theme
