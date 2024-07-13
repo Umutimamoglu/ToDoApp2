@@ -1,8 +1,8 @@
+import { IUser } from "../types";
+import axiosInstance, { BLOSSOM_TOKEN_NAME, saveToken } from "./config";
+import { AxiosError } from "axios";
 
-import { IUser } from "../types"
-import axiosInstance, { BLOSSOM_TOKEN_NAME, saveToken } from "./config"
-
-type RegisterUserTypes = IUser
+type RegisterUserTypes = IUser;
 
 export const registerUser = async ({
     email,
@@ -14,15 +14,21 @@ export const registerUser = async ({
             email,
             password,
             name,
-        })
-        return response.data.user
+        });
+        return response.data.user;
     } catch (error) {
-        console.log("error in registerUser", error)
-        throw error
+        if (error instanceof AxiosError) {
+            console.log("error response data:", error.response?.data);
+            console.log("error request:", error.request);
+            console.log("error message:", error.message);
+        } else {
+            console.log("unexpected error:", error);
+        }
+        throw error;
     }
-}
+};
 
-type LoginUserTypes = Omit<IUser, "name">
+type LoginUserTypes = Omit<IUser, "name">;
 export const loginUser = async ({ email, password }: LoginUserTypes) => {
     console.log("Login data:", { email, password }); // E-postayı ve şifreyi kontrol edin
     try {
@@ -30,12 +36,19 @@ export const loginUser = async ({ email, password }: LoginUserTypes) => {
             email,
             password,
         });
+        console.log("Login response:", response.data); // Yanıt verilerini kontrol edin
         const _token = response.data.token;
         axiosInstance.defaults.headers.common["Authorization"] = _token;
-        saveToken(BLOSSOM_TOKEN_NAME, _token);
+        await saveToken(BLOSSOM_TOKEN_NAME, _token);
         return response.data.user;
     } catch (error) {
-        console.log("error in loginUser", error);
+        if (error instanceof AxiosError) {
+            console.log("error response data:", error.response?.data);
+            console.log("error request:", error.request);
+            console.log("error message:", error.message);
+        } else {
+            console.log("unexpected error:", error);
+        }
         throw error;
     }
 };
