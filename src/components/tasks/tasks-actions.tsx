@@ -38,7 +38,7 @@ const TasksActions = ({ categoryId }: TasksActionsProp) => {
         name: "",
     })
 
-    const { data, trigger } = useSWRMutation("tasks", createTaskRequest)
+    const { data, trigger } = useSWRMutation("tasks/create", createTaskRequest)
 
     const [isSelectingCategory, setIsSelectingCategory] = useState<boolean>(false)
     const [isSelectingDate, setIsSelectingDate] = useState<boolean>(false)
@@ -57,6 +57,33 @@ const TasksActions = ({ categoryId }: TasksActionsProp) => {
     const selectedCategory = categories?.find(
         (_category) => _category._id == newTask.categoryId
     )
+
+
+    const onCreateTask = async () => {
+        try {
+
+            if (newTask.name.length.toString().trim().length > 0) {
+
+
+                trigger({
+                    ...newTask,
+                })
+                setNewTasks({
+                    categoryId: newTask.categoryId,
+                    isCompleted: false,
+                    date: todayISODate,
+                    name: "",
+
+                })
+            }
+
+
+        } catch (error) {
+            console.log("error in oncreateTask", error)
+            throw error
+        }
+    };
+
 
     return (
         <Box>
@@ -79,22 +106,7 @@ const TasksActions = ({ categoryId }: TasksActionsProp) => {
                             name: text
                         }));
                     }}
-                    onSubmitEditing={() => {
-                        if (newTask.name.length.toString().trim().length > 0) {
-
-
-                            trigger({
-                                ...newTask,
-                            })
-                            setNewTasks({
-                                categoryId: newTask.categoryId,
-                                isCompleted: false,
-                                date: todayISODate,
-                                name: "",
-
-                            })
-                        }
-                    }}
+                    onSubmitEditing={onCreateTask}
                 />
 
                 <Box flexDirection='row' alignItems='center'>

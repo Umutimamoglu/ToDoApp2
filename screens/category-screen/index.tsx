@@ -11,6 +11,7 @@ import Loader from '@/shared/loader'
 import NavigateBack from '@/shared/navigate-back'
 import TasksActions from '@/components/tasks/tasks-actions'
 import SafeAreaWrapper from '../../src/shared/safe-area-wrapper'
+import { FlatList } from 'react-native-reanimated/lib/typescript/Animated'
 
 
 type CategoryScreenRouteProp = RouteProp<CategoriesStackParamList, "Category">;
@@ -57,6 +58,7 @@ const CategoryScreen = () => {
                         style={{
                             color: category.color.code,
                         }}
+
                     >
                         {category.name}
                     </Text>
@@ -64,10 +66,22 @@ const CategoryScreen = () => {
                 <Box height={16} />
                 <TasksActions categoryId={id} />
                 <Box height={16} />
+                <FlatList
+                    data={tasks}
+                    renderItem={({ item, index }) => {
+                        return (
+                            <Box>
+                                <Text>{item.name}</Text>
+                            </Box>
+                        );
+                    }}
+                />
+
+
 
             </Box>
-        </SafeAreaWrapper>
-    );
-};
+        </SafeAreaWrapper >
+    )
+}
 
 export default CategoryScreen;
