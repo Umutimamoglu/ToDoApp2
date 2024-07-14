@@ -6,6 +6,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Pressable } from "react-native";
 import useSWRMutation from "swr/mutation";
 import axiosInstance, { fetcher } from "service/config";
+import { useNavigation } from "@react-navigation/native";
+import { HomeScreenNavigationType } from "navigation/types";
 
 
 const iconSize: 24 | 32 | 48 | 64 | 96 | 128 = 24;
@@ -52,8 +54,16 @@ const Task = ({ task }: TaskProps) => {
         }
     }
 
+
+    const navigation = useNavigation<HomeScreenNavigationType>()
+
+    const navigateToEditTask = () => {
+        navigation.navigate("EditTask", { task, })
+    }
+
+
     return (
-        <Pressable onPress={toggleTaskStatus}>
+        <Pressable onPress={toggleTaskStatus} onLongPress={navigateToEditTask}>
             <Box p="4" bg="lightGray" borderRadius="rounded-5xl" flexDirection="row">
                 <Box flexDirection="row" alignItems="center">
                     <Box
